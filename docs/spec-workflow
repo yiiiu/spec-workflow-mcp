@@ -1,0 +1,28 @@
+.spec-workflow/
+├── approvals/                # 审批流程核心存储目录
+│   └── [审批ID]/             # 单个审批请求的完整记录（自动生成）
+│       ├── approval.json     # 审批元数据（审批人、时间、状态、关联文件）
+│       ├── comment.md        # 审批备注/意见记录
+│       └── target-file.json  # 关联的变更文件快照（如规范文件旧版/新版对比）
+├── archive/                  # 历史数据归档目录
+│   ├── old-specs/            # 过时的接口规范版本归档
+│   ├── completed-workflows/  # 已结束的工作流记录归档
+│   └── expired-approvals/    # 过期/作废的审批记录归档
+├── specs/                    # 核心接口规范存储目录（工具默认监听此目录变更）
+│   ├── [业务模块名]/         # 按业务模块划分（示例：mobile-responsive/、flood-forecast/）
+│   │   ├── openapi.yaml      # 接口规范主文件（OpenAPI 3.x/2.x 格式，工具核心解析文件）
+│   │   ├── schema/           # 数据模型 Schema 定义子目录（可选）
+│   │   │   └── [模型名].json # 单个数据模型的 JSON Schema 定义
+│   │   └── docs/             # 规范配套文档（支持 MD 格式，需配置监听规则）
+│   │       └── product.md    # 业务产品说明/接口使用文档（如洪水预报接口说明）
+├── steering/                 # 工作流控制配置目录（工具核心配置中枢）
+│   ├── workflow-rules.json   # 工作流触发规则（如：规范变更→自动发起审批）
+│   ├── approval-config.json  # 审批规则配置（审批人、审批节点、是否必填）
+│   └── file-watch.json       # 文件监听规则（指定哪些目录/文件变更触发工作流）
+├── templates/                # 系统默认模板目录（工具内置，禁止手动修改）
+│   ├── openapi-template.yaml # OpenAPI 规范默认模板（快速创建规范文件）
+│   ├── approval-form.md      # 审批表单默认模板
+│   └── doc-template.md       # 规范配套文档默认模板
+└── user-templates/           # 用户自定义模板目录（团队可按需扩展）
+    ├── project-openapi.yaml  # 项目专属接口规范模板（如洪水预报业务定制版）
+    └── custom-doc.md         # 团队统一的文档模板（如接口说明文档格式）
